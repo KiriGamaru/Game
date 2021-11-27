@@ -33,6 +33,7 @@ namespace Game
             this.pbMain = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.txtLog = new System.Windows.Forms.RichTextBox();
+            this.txtPoints = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,7 +41,7 @@ namespace Game
             // 
             this.pbMain.Location = new System.Drawing.Point(-1, 0);
             this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(800, 593);
+            this.pbMain.Size = new System.Drawing.Size(546, 395);
             this.pbMain.TabIndex = 0;
             this.pbMain.TabStop = false;
             this.pbMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pbMain_Paint);
@@ -54,23 +55,35 @@ namespace Game
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(795, 0);
+            this.txtLog.Location = new System.Drawing.Point(541, 0);
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(296, 592);
+            this.txtLog.Size = new System.Drawing.Size(296, 395);
             this.txtLog.TabIndex = 1;
             this.txtLog.Text = "";
+            // 
+            // txtPoints
+            // 
+            this.txtPoints.AutoSize = true;
+            this.txtPoints.BackColor = System.Drawing.Color.Fuchsia;
+            this.txtPoints.Location = new System.Drawing.Point(485, 9);
+            this.txtPoints.Name = "txtPoints";
+            this.txtPoints.Size = new System.Drawing.Size(46, 15);
+            this.txtPoints.TabIndex = 2;
+            this.txtPoints.Text = "очки: 0";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1090, 593);
+            this.ClientSize = new System.Drawing.Size(836, 395);
+            this.Controls.Add(this.txtPoints);
             this.Controls.Add(this.txtLog);
             this.Controls.Add(this.pbMain);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -79,6 +92,7 @@ namespace Game
         private System.Windows.Forms.PictureBox pbMain;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RichTextBox txtLog;
+        private System.Windows.Forms.Label txtPoints;
     }
 }
 

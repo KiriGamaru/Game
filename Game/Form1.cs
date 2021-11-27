@@ -16,7 +16,7 @@ namespace Game
         List<BaseObject> objects = new();//список
         Player player;// поле под игрока
         Marker marker;//поле под маркер
-
+        int p = 0;//счётчик очков
         public Form1()
         {
             InitializeComponent();
@@ -29,18 +29,31 @@ namespace Game
                 txtLog.Text = $"[{DateTime.Now:HH:mm:ss:ff}] Игрок пересекся с {obj}\n" + txtLog.Text;
             };
 
-            //реакциz на пересечение с маркером
+            //реакция на пересечение с маркером
             player.OnMarkerOverlap += (m) =>
             {
                 objects.Remove(m);
                 marker = null;
             };
 
+            //реакция на пересечение с зелёным кругом
+            player.OnGreenrOverlap += (m) =>
+            {
+
+                var rnd = new Random();
+                objects.Remove(m);
+                objects.Add(new GreenCircle(rnd.Next(10, 500), rnd.Next(10, 350), 0));
+                p++;
+                txtPoints.Text = $"очки: {p}";
+            };
+
+            var rnd = new Random();
             marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
             objects.Add(marker);
+            objects.Add(new GreenCircle(rnd.Next(10, 500), rnd.Next(10, 350), 0));
+            objects.Add(new GreenCircle(rnd.Next(10, 500), rnd.Next(10, 350), 0));
             objects.Add(player);
-            objects.Add(new MyRectangle(50, 50, 0));
-            objects.Add(new MyRectangle(100, 100, 45));
+            
         }
 
         private void pbMain_Paint(object sender, PaintEventArgs e)

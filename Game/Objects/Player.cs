@@ -10,6 +10,7 @@ namespace Game.Objects
 {
     class Player : BaseObject
     {
+        public Action<GreenCircle> OnGreenrOverlap;
         public Action<Marker> OnMarkerOverlap;
         public float vX, vY;
         public Player(float x, float y, float angle) : base(x, y, angle)
@@ -33,9 +34,15 @@ namespace Game.Objects
         public override void Overlap (BaseObject obj)
         {
             base.Overlap(obj);
+
             if (obj is Marker)
             {
                 OnMarkerOverlap(obj as Marker);
+            }
+
+            if (obj is GreenCircle)
+            {
+                OnGreenrOverlap(obj as GreenCircle);
             }
         }
     }

@@ -1,25 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
 
 namespace Game.Objects
 {
-    class MyRectangle : BaseObject // наследуем BaseObject
+    class GreenCircle : BaseObject // наследуем BaseObject
     {
         // создаем конструктор с тем же набором параметров что и в BaseObject
         // base(x, y, angle) -- вызывает конструктор родительского класса
-        public MyRectangle(float x, float y, float angle) : base(x, y, angle)
+        public GreenCircle(float x, float y, float angle) : base(x, y, angle)
         {
         }
 
         // переопределяем Render
         public override void Render(Graphics g)
         {
-            g.FillRectangle(new SolidBrush(Color.Yellow), -25, -15, 50, 30);
-            g.DrawRectangle(new Pen(Color.Red, 2), -25, -15, 50, 30);
+            g.FillEllipse(new SolidBrush(Color.GreenYellow), -15, -15, 30, 30);//кружочек с синим фоном
+        }
+        public override GraphicsPath GetGraphicsPath()
+        {
+            var path = base.GetGraphicsPath();
+            path.AddEllipse(-15, -15, 30, 30);
+            return path;
         }
     }
 }
