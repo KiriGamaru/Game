@@ -16,12 +16,18 @@ namespace Game
         List<BaseObject> objects = new();//список
         Player player;// поле под игрока
         Marker marker;//поле под маркер
+        GreenCircle green1;//поле под первый зелёный кружочек
+        GreenCircle green2;//поле под второй зелёный кружочек
+
         int p = 0;//счётчик очков
         public Form1()
         {
             InitializeComponent();
 
             player = new Player(pbMain.Width / 2, pbMain.Height / 2, 0); //экзэмпляр класса игрока в центре экрана
+            var rnd = new Random();
+            green1 = new GreenCircle(rnd.Next(15, 430), rnd.Next(15, 240), 0);//первый экзэмпляр класса зелёного кружочка в рандомном месте экрана
+            green2 = new GreenCircle(rnd.Next(15, 430), rnd.Next(15, 240), 0);//второй экзэмпляр класса зелёного кружочка в рандомном месте экрана
 
             //реакция на пересечение                                                             
             player.OnOverlap += (p, obj) =>
@@ -39,19 +45,27 @@ namespace Game
             //реакция на пересечение с зелёным кругом
             player.OnGreenrOverlap += (m) =>
             {
-
                 var rnd = new Random();
                 objects.Remove(m);
-                objects.Add(new GreenCircle(rnd.Next(10, 500), rnd.Next(10, 350), 0));
+
+                if (m == green1)
+                {
+                    green1 = new GreenCircle(rnd.Next(15, 430), rnd.Next(15, 240), 0);
+                    objects.Add(green1);
+                }
+                else
+                {
+                    green2 = new GreenCircle(rnd.Next(15, 430), rnd.Next(15, 240), 0);
+                    objects.Add(green2);
+                }
                 p++;
                 txtPoints.Text = $"очки: {p}";
             };
 
-            var rnd = new Random();
             marker = new Marker(pbMain.Width / 2 + 50, pbMain.Height / 2 + 50, 0);
             objects.Add(marker);
-            objects.Add(new GreenCircle(rnd.Next(10, 500), rnd.Next(10, 350), 0));
-            objects.Add(new GreenCircle(rnd.Next(10, 500), rnd.Next(10, 350), 0));
+            objects.Add(green1);
+            objects.Add(green2);
             objects.Add(player);
             
         }
@@ -60,8 +74,11 @@ namespace Game
         {
             var g = e.Graphics; // вытащили объект графики из события
             g.Clear(Color.Gray);// залил фон
-
             updatePlayer();//пересчёт игрока
+
+            
+
+
 
             // пересчитываем пересечения
             foreach (var obj in objects.ToList()) 
@@ -80,7 +97,6 @@ namespace Game
                 g.Transform = obj.GetTransform();
                 obj.Render(g);
             }
-
 
         }
 
@@ -131,6 +147,30 @@ namespace Game
             }
             marker.X = e.X;
             marker.Y = e.Y;
+        }
+
+
+
+        private void timerGreen_Tick(object sender, EventArgs e)
+        {
+            green1.R--;
+            green2.R--;
+
+            var rnd = new Random();
+            //реакция на нулевой радиус первого зелёного кружочка
+            if (green1.R <= 0)
+            {
+                objects.Remove(green1);
+                green1 = new GreenCircle(rnd.Next(15, 430), rnd.Next(15, 240), 0);
+                objects.Add(green1);
+            }
+            //реакция на нулевой радиус второго зелёного кружочка
+            if (green2.R <= 0)
+            {
+                objects.Remove(green2);
+                green2 = new GreenCircle(rnd.Next(15, 430), rnd.Next(15, 240), 0);
+                objects.Add(green2);
+            }
         }
     }
 }

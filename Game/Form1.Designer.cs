@@ -34,6 +34,7 @@ namespace Game
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.txtLog = new System.Windows.Forms.RichTextBox();
             this.txtPoints = new System.Windows.Forms.Label();
+            this.timerGreen = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,7 +42,7 @@ namespace Game
             // 
             this.pbMain.Location = new System.Drawing.Point(-1, 0);
             this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(546, 395);
+            this.pbMain.Size = new System.Drawing.Size(466, 281);
             this.pbMain.TabIndex = 0;
             this.pbMain.TabStop = false;
             this.pbMain.Paint += new System.Windows.Forms.PaintEventHandler(this.pbMain_Paint);
@@ -55,9 +56,9 @@ namespace Game
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(541, 0);
+            this.txtLog.Location = new System.Drawing.Point(464, 0);
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(296, 395);
+            this.txtLog.Size = new System.Drawing.Size(185, 281);
             this.txtLog.TabIndex = 1;
             this.txtLog.Text = "";
             // 
@@ -65,17 +66,23 @@ namespace Game
             // 
             this.txtPoints.AutoSize = true;
             this.txtPoints.BackColor = System.Drawing.Color.Fuchsia;
-            this.txtPoints.Location = new System.Drawing.Point(485, 9);
+            this.txtPoints.Location = new System.Drawing.Point(412, 9);
             this.txtPoints.Name = "txtPoints";
             this.txtPoints.Size = new System.Drawing.Size(46, 15);
             this.txtPoints.TabIndex = 2;
             this.txtPoints.Text = "очки: 0";
             // 
+            // timerGreen
+            // 
+            this.timerGreen.Enabled = true;
+            this.timerGreen.Interval = 70;
+            this.timerGreen.Tick += new System.EventHandler(this.timerGreen_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(836, 395);
+            this.ClientSize = new System.Drawing.Size(652, 280);
             this.Controls.Add(this.txtPoints);
             this.Controls.Add(this.txtLog);
             this.Controls.Add(this.pbMain);
@@ -93,6 +100,7 @@ namespace Game
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.RichTextBox txtLog;
         private System.Windows.Forms.Label txtPoints;
+        private System.Windows.Forms.Timer timerGreen;
     }
 }
 
